@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+<meta charset="UTF-8">
+<title>Write</title>
+<link rel="stylesheet" th:href="@{/css/user/diarywriter.css}">
+</head>
+<body>
+	<div id="container" style="height: 1000px;">
+		<div th:replace="~{header}"></div>
+		<div id="container2">
+		<section id="writeform">
+		<h2>My Health Diary</h2>
+		<form th:action="@{|/user/diarywrite/${uno}|}" method="post">
+			<table class="tbl_list">
+				<tbody>
+					<tr>
+						<td>
+							<input type="text" name="dtitle"
+								placeholder="글 제목">
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<div sec:authorize="isAuthenticated()">
+							<h2><span sec:authentication="principal.users.unickname"></span>의 My Health Diary</h2>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<textarea rows="5" cols="50" name="dcontent"
+									placeholder="내용을 입력해주세요"></textarea>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<div class="filebox">
+		                       <input class="upload-name" value="첨부파일" placeholder="첨부파일" readonly>
+		                       <label for="diaryFile" class="file_btn">파일 찾기</label> 
+		                       <input type="file" id="bgmFile" name="bgmFile">
+		                   </div>
+	                   </td>
+                   </tr>
+					<tr>
+						<td>
+							<input type="submit" value="등록">
+							<button type="reset">취소</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</form>
+		</section>
+		</div>
+		<div th:replace="~{footer}"></div>
+</div>
+
+<!-- 파일명 들어가기 -->
+<script>
+   $("#diaryFile").on('change',function(){
+      var fileName = $("#diaryFile").val();
+      $(".upload-name").val(fileName);
+    });
+</script>
+</body>
+</html>

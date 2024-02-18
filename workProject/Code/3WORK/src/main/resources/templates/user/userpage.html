@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+   xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+<meta charset="UTF-8">
+<meta name="_csrf_header" th:content="${_csrf.headerName}">
+<meta name="_csrf" th:content="${_csrf.token}">
+<title>3WORK</title>
+<link rel="stylesheet" href="/css/UserpageCss.css">
+<script src="https://kit.fontawesome.com/7c6041109a.js" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+<link href='/css/cal.css' rel='stylesheet' />
+<script src='/js/cal.js'></script>
+<script src="https://cdn.jsdelivr.net/npm/@fullcalendar/common@5.11.2/main.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@5.11.2/main.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@fullcalendar/timegrid@5.11.2/main.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@fullcalendar/interaction@5.11.2/main.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@fullcalendar/google-calendar@5.11.2/main.min.js"></script>
+<script src='/js/comments.js'></script>
+<script type='text/javascript'>
+document.addEventListener('DOMContentLoaded', function() {
+  var calendarEl = document.getElementById('calendar');
+  var calendar = new FullCalendar.Calendar(calendarEl, {
+    headerToolbar: {
+      left: 'prev,next today',
+      center: 'title',
+      right: 'dayGridMonth,timeGridWeek,timeGridDay'
+    },
+    initialDate: '2024-02-18',
+    navLinks: true,
+    selectable: true,
+    selectMirror: true,
+    select: function(arg) {
+      var title = prompt('Event Title:');
+      if (title) {
+        calendar.addEvent({
+          title: title,
+          start: arg.start,
+          end: arg.end,
+          allDay: arg.allDay
+        })
+      }
+      calendar.unselect()
+    },
+    eventClick: function(arg) {
+      if (confirm('계획을 삭제하시겠습니까?')) {
+        arg.event.remove()
+      }
+    },
+    editable: true,
+    dayMaxEvents: true, // allow "more" link when too many events
+    events: [
+      {
+        title: '건강 식단 알아보기',
+        start: '2024-02-01'
+      },
+      {
+        title: '금주 일주일 도전!',
+        start: '2024-02-07',
+        end: '2020-02-10'
+      },
+      {
+        groupId: 999,
+        title: '오후 점심 약속',
+        start: '2024-02-09T16:00:00'
+      },
+      {
+        groupId: 999,
+        title: 'PT 수업',
+        start: '2024-02-16T16:00:00'
+      },
+      {
+        title: '전주 맛집 여행',
+        start: '2024-02-11',
+        end: '2024-02-13'
+      },
+      {
+        title: '건강 세미나 참석',
+        start: '2024-02-20T10:30:00',
+        end: '2024-02-20T12:30:00'
+      },
+      {
+        title: '영양제 챙겨먹기',
+        start: '2024-02-20T12:00:00'
+      },
+      {
+        title: 'PT 수업',
+        start: '2024-02-20T14:30:00'
+      },
+      {
+        title: '런닝 뛰기',
+        start: '2024-02-20T17:30:00'
+      },
+      {
+        title: '저녁 산책',
+        start: '2024-02-20T20:00:00'
+      },
+      {
+        title: '친구놈 생일',
+        start: '2024-02-13T07:00:00'
+      },
+      {
+        title: '운동기구 사기',
+        url: 'http://google.com/',
+        start: '2024-02-28'
+      }
+    ],
+ //Google Calendar 이벤트 소스
+    eventSources: [
+        {
+            googleCalendarApiKey: 'AIzaSyCndw5HkzItEmGRP2mPMPOPKPsRKeIZCDc',
+            googleCalendarId: '1515eun30@gmail.com',
+            className: '예은yeeun',
+            color: '#4885ed', // 이벤트 색상 (옵션)
+            textColor: '#ffffff' // 텍스트 색상 (옵션)
+        }
+    ]
+  });
+  calendar.render();
+});
+</script>
+</head>
+<body>
+<div id="userMain">
+    <div id="container">
+        <!-- BGM bar 영역 -->
+      <div id="bgm-controls" class="bgm-bar">
+          <div class="bgm-title-container">
+              <div id="bgm-title" class="bgm-title">BGM을 설정해주세요.</div>
+          </div>
+          <button id="play-pause-btn" class="play-pause-btn"><i class="fa-solid fa-play"></i></button>
+          <div class="volume-control">
+              <input type="range" id="volume-slider" min="0" max="1" step="0.01" value="1">
+          </div>
+          <input type="color" id="bg-color-picker" value="#f0f0f0">
+      </div>
+      <audio id="bgm-audio" th:src="@{|/upload/mp3/${Userinfo.bgmname}|}" autoplay loop></audio>
+      <!-- 사이드 메뉴 영역 -->
+      <div id="side_image">
+      	<div id="image1">
+      		<p>10Kg 감량중!</p>
+	      	<img th:src="@{/images/userpage/side-image1.png}" alt="side-image">
+      	</div>
+      </div>
+      <div id="side_image2">
+	    <div id="image2">
+	      <p>
+	      <a th:href="@{|/user/userdiary/${Userinfo.uno}|}">나의 건강일지</a>
+	      </p>
+	      	<img th:src="@{/images/userpage/health_dairy.png}" alt="side-image">
+	      
+	    </div>
+      </div>
+      <!-- 사이드 메뉴 영역 -->
+      <!-- <div id="diary">
+       <div id="diary_btn">
+          <a th:href="'#'">나의 건강일지</a>
+       </div>
+      </div> -->
+      <!-- 프로필, 캘린더 영역 -->
+      <section id="profile">
+          <p>TODAY <span id="today-visits" th:text="${Userinfo.hits}"></span> | 
+          	TOTAL <span id="total-visits" th:text="${Userinfo.hits}"></span></p>
+          <div id="profile-pic">
+       <img th:if="${Userinfo.ufilename != null}" th:src="@{|/upload/profile/${Userinfo.ufilename}|}" 
+          style="width: 100%; height: 100%; border-radius: 17px;" alt="프로필">
+       <span th:unless="${Userinfo.ufilename != null}" id="pimage-text">프로필 이미지를<br> 설정해주세요</span>
+  		  </div>
+          <p th:text="${Userinfo.unickname} + '의 Health Place'"></p>
+              <a th:href="@{/user/userupdate}" id="setting">
+                  <i class="fa-solid fa-gear"></i>
+              </a>
+         
+          <p>한줄 소개명</p>
+		   <p th:text="${Userinfo != null ? (Userinfo.uintroduce != null ? 
+		   Userinfo.uintroduce : '소개글을 설정해주세요.') : '소개글을 설정해주세요.'}"></p>
+		   <div id="line"></div> 
+		   
+		   <p>좋아하는 것</p>
+		   <p th:text="${Userinfo != null ? (Userinfo.ulike != null ? 
+		   Userinfo.ulike : '관심사를 설정해주세요') : '관심사를 설정해주세요'}"></p>
+		   <div id="line"></div>
+		   <div id='calendar'></div>
+      </section>
+
+      <section id="comments">
+          <h2 id="commenth2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              방명록<img th:src="@{/images/comment.png}" alt="방명록">
+          </h2>
+           <!-- 방명록 작성 영역 -->
+<form id="comment-form">
+    <div id="comment-container">
+        <input type="hidden" id="uno" th:value="${Userinfo.uno}">
+        <input type="text" id="comment" name="ccontent" placeholder="자유롭게 방명록을 작성해주세요.">
+        <button id="btns">작성</button>
+    </div>
+</form>
+
+<!-- 방명록 목록 영역 -->
+<div id="comment-list">
+    <div th:each="comment : ${commentList}">
+        <div id="ccontent-body">
+            <div class="comment-body">
+                <p>
+                    <span id="replyid" th:text="${comment.users.unickname}"></span>
+                    <span id="reply_time" th:text="${#dates.format(comment.createdDate, 'yyyy-MM-dd HH:mm')}"></span>
+                </p>
+                <div id="comment_update">
+                    <!-- 삭제 버튼은 작성자와 로그인 회원이 같을 때만 보이도록 설정 -->
+                    <a href="#" th:if="${comment.users.uno == Userinfo.uno}" 
+                        id="comment_del" th:onclick="deleteComment([[${Userinfo.uno}]], [[${comment.cno}]])">삭제&nbsp;|&nbsp;</a>
+                    <!-- 수정 버튼 -->
+                    <a href="#" th:if="${comment.users.uno == Userinfo.uno}" 
+                        id="comment_up" th:onclick="commentObject.UpdateComment([[${Userinfo.uno}]], [[${comment.cno}]])">수정</a>
+                </div>
+            </div>
+            <p id="content" th:text="${comment.ccontent}"></p>
+            <!-- 댓글 수정 -->
+            <div th:id="'replyModal' + ${comment.cno}" class="modal" style="display: none ;">
+                <div class="modal_content">
+                    <div style="display: none;" th:id="'originalContent' + ${comment.cno}" th:text="${comment.ccontent}"></div>
+                    <textarea class="upcomment_content" th:id="'commentContent' + ${comment.cno}" rows="1" cols="50"></textarea>
+                </div>
+                <div class="reply_update_confirm_box">
+                    <button th:id="'updateReplyBtn_confirm' + ${comment.cno}" 
+                    		class="updateReplyBtn_confirm">저장</button>
+                    <button th:id="'updateReplyBtn_cancel' + ${comment.cno}" 
+                    		class="updateReplyBtn_cancel" type="reset">취소</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+			
+			
+      <!-- 페이지 영역 -->
+      <div class="pagination" th:if="${commentList.totalElements > 0}">
+          <!-- 이전 페이지 -->
+          <a id="page" th:href="${commentList.first} ? '#' : @{|/user/userpage/${Userinfo.uno}|(page=${commentList.number})}">
+             <i class="fa-solid fa-caret-left"></i></a>
+          <!-- 페이지 번호 영역 -->
+          <span class="current_page" th:each="page: ${#numbers.sequence(startPage, endPage)}">
+              <!-- 현재 페이지는 링크없이 숫자만 표시 -->
+              <span class="current_page" th:if="${page == commentList.number + 1}" th:text="${page}"></span>
+              <span th:if="${page != commentList.number + 1}">
+                  <a class="another_page" th:href="@{|/user/userpage/${Userinfo.uno}|(page=${page})}" th:text="${page}"></a>
+              </span>
+          </span>
+          <!-- 다음 페이지 -->
+          <a id="page" th:href="${commentList.last} ? '#' : @{|/user/userpage/${Userinfo.uno}|(page=${commentList.number + 2})}">
+             <i class="fa-solid fa-caret-right"></i></a>
+      </div>
+      <div id="no-comments" th:unless="${commentList.totalElements > 0}">
+          <p>방명록이 없습니다.</p>
+      </div>
+    </section>
+    </div>
+</div>
+<script>
+//BGM 재생
+const audio = document.getElementById('bgm-audio');
+const playPauseBtn = document.getElementById('play-pause-btn');
+const bgmTitle = document.getElementById('bgm-title');
+const bgmControls = document.getElementById('bgm-controls');
+const bgColorPicker = document.getElementById('bg-color-picker');
+const volumeSlider = document.getElementById('volume-slider'); // 추가: 볼륨 슬라이더 요소
+
+// 재생/일시정지 버튼
+playPauseBtn.addEventListener('click', () => {
+    if (audio.paused) {
+        audio.play();
+        playPauseBtn.innerHTML = '<i class="fa-solid fa-pause"></i>';
+    } else {
+        audio.pause();
+        playPauseBtn.innerHTML = '<i class="fa-solid fa-play"></i>';
+    }
+});
+
+// BGM Bar 배경화면 변경 기능
+bgColorPicker.addEventListener('input', () => {
+    bgmControls.style.backgroundColor = bgColorPicker.value;
+});
+
+// 노래 제목 관련
+audio.addEventListener('loadedmetadata', () => {
+    const songTitle = '아이유(IU) - Love Wins All';
+    bgmTitle.textContent = songTitle;
+    bgmTitle.title = songTitle; // 오른쪽에서 왼쪽으로 움직일 때 전체 제목을 표시하기 위해 title 속성 설정
+
+    // 자동 재생 상태에 따라 재생/일시 정지 버튼 업데이트
+    if (!audio.paused) {
+        playPauseBtn.innerHTML = '<i class="fa-solid fa-pause"></i>';
+    } else {
+        playPauseBtn.innerHTML = '<i class="fa-solid fa-play"></i>';
+    }
+});
+
+// Volume control
+volumeSlider.addEventListener('input', () => {
+    audio.volume = volumeSlider.value;
+});
+</script>
+</body>
+</html>

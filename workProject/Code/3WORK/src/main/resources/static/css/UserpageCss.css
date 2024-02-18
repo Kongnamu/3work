@@ -1,0 +1,405 @@
+/* Userpage CSS */
+/* 글씨체 */
+@font-face {
+  font-family: 'SBAggroL';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SBAggroL.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'SBAggroM';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SBAggroM.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'SBAggroB';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SBAggroB.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+}
+
+/* 유저 페이지 메인 css */
+#userMain {
+  position: relative;
+  width: 1400px;
+  height: 800px;
+}
+#all-container {
+  margin-top: 30px;
+}
+body{
+  margin: 0;
+  padding: 0;
+  background-color: #F1F3E1;
+  font-family: 'SBAggroL';
+}
+#container {
+  background-color: #ffffff;
+  width: 1318.59px;
+  height: 850px;
+  border-radius: 20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  box-shadow: 0px 4px 4px rgba(0,0,0,0.25);
+  margin-top: 50px;
+}
+
+#diary {
+   border: none;
+   box-shadow: 0px 4px 4px rgba(0,0,0,0.25);
+   width: 100px;
+   height: 40px;
+   position: absolute;
+   top: 18.5%;
+   right: -4%;
+   background-color: #667788;
+   border-radius: 5px;
+}
+#diary_btn {
+   margin-top: 10px;
+   font-size:1em;
+}
+#diary a{
+   font-family: 'SBAggroM';
+   font-size: 0.8em;
+   text-decoration: none;
+   color: black;
+}
+
+ /* BGM 바와 버튼 스타일 */
+ /* BGM 바와 버튼 스타일 */
+.bgm-bar {
+    display: flex;
+    align-items: center;
+    background-color: #f0f0f0;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    width: 390px;
+    height: 10px; /* Increase height for better visibility */
+    font-size: 0.8em;
+    position: absolute;
+    top: 3%;
+    right: 1%;
+}
+
+.bgm-title-container {
+    flex-grow: 1;
+    margin-right: 10px;
+    font-weight: bold;
+    position: relative;
+    overflow: hidden;
+}
+
+.bgm-title {
+    white-space: nowrap; /* Prevent line breaks */
+    animation: marquee 10s linear infinite;
+}
+
+@keyframes marquee {
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(-100%); }
+}
+
+.play-pause-btn {
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 20px;
+    margin-right: 10px;
+}
+
+#bg-color-picker {
+    width: 30px;
+    height: 30px;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+/* 사이지 뱃지 스타일 */
+#side_image{
+  width: 200px;
+  border: 3px dotted black;
+  border-radius: 15px;
+  position: absolute;
+  top: 9%;
+  right: 1%;
+  background-color: rgb(102, 119, 135);
+  box-shadow: 0px 10px 10px rgba(0,0,0,0.28);
+}
+#side_image p{
+  font-family: 'SBAggroB';
+  margin: 19px 0 0 27px;
+}
+#side_image #image1{
+ margin-left: -26px;
+}
+#side_image img{
+  width: 250px;
+  height: 250px;
+}
+
+#side_image2{
+  width: 200px;
+  height: 300px;
+  border: none;
+  border-radius: 5%;
+  position: absolute;
+  top: 45%;
+  right: 1.5%;
+  box-shadow: 0px 10px 10px rgba(0,0,0,0.28);
+}
+#side_image2 p{
+  font-family: 'SBAggroB';
+  margin: 19px 0 0 27px;
+  position: absolute;
+  top: 29.5%;
+  right: 23.5%;
+}
+#side_image2 img{
+  width: 207px;
+  height: 302px;
+  margin: 8px 0 0 0px;
+  border-radius: 5%;
+}
+
+/* 프로필 스타일 */
+#profile {
+  font-family: 'SBAggroL';
+  text-align: left;
+  width: 300px;
+  height: 300px;
+  margin: 76px 0 0 27px
+}
+#line{
+  border-bottom: 1px solid #ccc;
+}
+
+#profile-pic #pimage-text{
+  position: absolute;
+  bottom: 70%;
+  right: 82.5%;
+  text-align: center;
+}
+
+#profile p {
+  margin-bottom: 5px;
+  font-size: 0.8em;
+}
+#profile p:nth-of-type(1){
+  margin-top: 0px;
+}
+#today-visits {
+  font-family: 'SBAggroL';
+  color: red;
+}
+#total-visits {
+  font-family: 'SBAggroL';
+  color: blue;
+}
+#profile-pic {
+  width: 286px;
+  height: 295px;
+  border: 3px solid #ccc;
+  border-radius: 20px;
+  margin: 10px 0;
+}
+#profile p:nth-child(3) {
+  font-family: 'SBAggroB';
+  margin-top: 20px;
+  font-size: 1.3em;
+}
+#profile p:nth-child(5),
+#profile p:nth-child(8) {
+  font-family: 'SBAggroM';
+  margin-top: 10px;
+  font-size: 1.1em;
+  color: #838383;
+}
+#setting {
+  color: #ccc;
+  margin-top: 5px;
+  position: absolute;
+  top: 49.5%;
+  right: 76%
+}
+#calendar{
+  position: absolute;
+  bottom: 44%;
+  right: 18%;
+  width: 735px;
+  height: 400px;
+  font-size: 0.9em;
+}
+
+/* 방명록 스타일 */
+#comments {
+  position: absolute;
+  bottom: 15%;
+  right: 18%;
+  font-family: 'SBAggroL';
+  font-size: 1em;
+  width: 735px;
+  height: 250px;
+  text-align: left;
+}
+#commenth2{margin: 23px 0 0 0;}
+#comments img {
+  position: absolute; 
+  bottom: 73%;
+  right: 93%;
+}
+#comment-form {margin-bottom: 15px;}
+#comment-list {
+  padding: 0;
+}
+#comment-list{
+   padding-left: 10px;
+}
+#comment-list p {
+  margin: 0;
+  font-size: 0.8em;
+}
+#comment-list #replyid{
+   color: #27a900;
+   font-weight: bold;
+   margin: 5px 0 5px 0;
+}
+#no-comments{
+   text-align: center;
+}
+#ccontent-body{
+   border-bottom: 1.5px dotted #ccc;
+   width: 100%;
+   margin-bottom: 10px;
+}
+.comment-body{
+   display: flex;
+   justify-content: space-between;
+   margin-top: 7px;
+}
+
+#comment-list .comment-body #reply_time {
+   color: #ccc;
+   font-size: 0.2em;
+   margin: 5px 0 0 5px;
+}
+
+#comment_del, #comment_up{
+	text-decoration: none;
+	color: dimgray;
+	font-size: 0.9em;
+}
+#comment_update{
+	display: flex;
+	justify-content: space-between;
+}
+
+#comment-list li #replywrite{
+   float: right;
+   position: absolute; bottom: 27%; right: 0%;
+   color: #ccc;
+}
+#comment-container{
+   border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 3px 10px 10px 10px;
+    width: 715px;
+    height: 23px;
+}
+#comment{
+  border: none;
+  width: 700px;
+  height: 20px;
+  padding: 5px;
+  font-size: 10px;
+  outline: none;
+}
+#comment-list li:nth-child(2){
+   border-bottom: 1.5px dotted #ccc;
+   width: 100%;
+   }
+#comment-list li:nth-child(3){
+   border-bottom: 1.5px solid #ccc;
+   width: 100%;
+   }
+#comment-list li{padding:3px;}
+#btns{
+  background-color: #f1f3e1;
+  box-shadow: 0px 4px 4px rgba(0,0,0,0.25);
+  border: none;
+  padding: 3px 5px;
+  border-radius: 20%;
+  font-size: 13px;
+  position: absolute; bottom: 67.5%; right: 2%;
+}
+.upcomment_content{
+	border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 3px 10px 10px 10px;
+    width: 704px;
+    height: 23px;
+}
+/* 방명록 수정시 저장, 취소 버튼 스타일 */
+.modal_content {
+    display: flex;
+    flex-direction: column;
+}
+.reply_update_confirm_box {
+    margin: -33px 0 0 620px;
+    display: flex;
+    align-items: center;
+}
+.updateReplyBtn_confirm,
+.updateReplyBtn_cancel{
+	margin-left: 9px;
+	background-color: #f1f3e1;
+    box-shadow: 0px 4px 4px rgba(0,0,0,0.25);
+    border: none;
+    padding: 3px 5px;
+    border-radius: 20%;
+    font-size: 13px;
+}
+
+/* 페이지 영역 스타일 */
+.pagination{
+   text-align : center;
+   margin-top : 10px;
+}
+.pagination a{
+   text-decoration: none;
+   color: #818080;
+   font-size: 1em;
+   margin: 0 2px 0 2px;
+}
+.pagination .current_page{
+   color: #818080;
+   font-weight: bold;
+   color: navy;
+   margin: 0 2px 0 2px;
+}
+#page, current_page {
+    display: inline-block; 
+    font-size: 1em;
+    margin: 0 2px 0 2px;
+    width: 7px;
+}
+.pagination #page{
+   width: 10px;
+   font-size: 1em;
+}
+.pagination #another_page{
+   font-size: 1em;
+    margin: 0 2px 0 2px;
+}
+
+
+
+
+
+
